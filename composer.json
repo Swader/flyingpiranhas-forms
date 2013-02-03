@@ -1,0 +1,31 @@
+{
+    "name": "flyingpiranhas/forms",
+    "type": "library",
+    "description": "The flyingpiranhas forms are a set of classes to help with form generation and processing in PHP. It has some dependencies, though, but if you're installing through composer they're all pulled automatically.",
+    "keywords": ["framework","wireframe", "wireframework", "forms"],
+    "homepage": "http://github.com/Swader/flyingpiranhas-forms",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Bruno Skvorc",
+            "email": "bruno@skvorc.me",
+            "homepage": "http://www.bitfalls.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Ivan Pintar",
+            "email": "pintree.rg@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+	"flyingpiranhas\\common" : "dev-master"
+    },
+    "autoload": {
+        "psr-0": {
+            "flyingpiranhas\\forms": "../.."
+        }
+    },
+    "target-dir": ""
+}
