@@ -2,6 +2,8 @@
 
 namespace flyingpiranhas\forms\validators;
 
+use flyingpiranhas\forms\elements\abstracts\ElementAbstract;
+
 /**
  * The FileSize validator should be used with File elements
  * to check that the size of the posted file is not above the maximum file size limit.
@@ -32,8 +34,10 @@ class FileSize extends Validator
     {
         parent::__construct($aProperties);
         $iFileSize = $this->iFileSize;
-        $this->setValidatorFunction(function () use ($iFileSize) {
-            $aFile = $this->oElement->getValue();
+
+        $this->setValidatorFunction(function ($oElement) use ($iFileSize) {
+            /** @var $oElement ElementAbstract */
+            $aFile = $oElement->getValue();
             if (!empty($aFile['tmp_name']) && $aFile['size'] > $iFileSize) {
                 return false;
             }

@@ -2,6 +2,8 @@
 
 namespace flyingpiranhas\forms\validators;
 
+use flyingpiranhas\forms\elements\abstracts\ElementAbstract;
+
 /**
  * The Range validator can be used with a number of elements
  * to check if the values are within a required range.
@@ -42,8 +44,10 @@ class Range extends Validator
         $iMin = $this->iMin;
         $iMax = $this->iMax;
         $this->setValidatorFunction(
-            function () use ($iMin, $iMax) {
-                $mValue = $this->oElement->getValue();
+            function ($oElement) use ($iMin, $iMax) {
+                /** @var $oElement ElementAbstract */
+
+                $mValue = $oElement->getValue();
 
                 $iCount = 0;
                 if (is_numeric($mValue)) {

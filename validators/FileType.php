@@ -2,6 +2,8 @@
 
 namespace flyingpiranhas\forms\validators;
 
+use flyingpiranhas\forms\elements\abstracts\ElementAbstract;
+
 /**
  * The FileType validator should be used with File elements
  * to check that the mime type of the posted file is one of the allowed types.
@@ -34,8 +36,9 @@ class FileType extends Validator
 
         $aFileTypes = $this->aFileTypes;
         $this->setValidatorFunction(
-            function () use ($aFileTypes) {
-                $aFile = $this->oElement->getValue();
+            function ($oElement) use ($aFileTypes) {
+                /** @var $oElement ElementAbstract */
+                $aFile = $oElement->getValue();
                 if (!empty($aFile['tmp_name']) && !in_array($aFile['type'], $aFileTypes)) {
                     return false;
                 }

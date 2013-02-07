@@ -2,6 +2,8 @@
 
 namespace flyingpiranhas\forms\validators;
 
+use flyingpiranhas\forms\elements\abstracts\ElementAbstract;
+
 /**
  * The FileExtension validator should be used with File elements
  * to check that the of the posted file extension is one of the allowed extensions.
@@ -35,8 +37,10 @@ class FileExtension extends Validator
         $aFileExtensions = $this->aFileExtensions;
 
         $this->setValidatorFunction(
-            function () use ($aFileExtensions) {
-                $aFile = $this->oElement->getValue();
+            function ($oElement) use ($aFileExtensions) {
+                /** @var $oElement ElementAbstract */
+
+                $aFile = $oElement->getValue();
                 $sExt = pathinfo($aFile['name'], PATHINFO_EXTENSION);
 
                 if (!empty($aFile['tmp_name']) && !in_array($sExt, $aFileExtensions)) {

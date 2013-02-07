@@ -2,6 +2,8 @@
 
 namespace flyingpiranhas\forms\validators;
 
+use flyingpiranhas\forms\elements\abstracts\ElementAbstract;
+
 /**
  * The EqualValues validator should be used with elements
  * that post an array of values (Groups, Select with multiselect options)
@@ -33,14 +35,17 @@ class EqualValues extends Validator
     public function __construct(array $aProperties = array())
     {
         parent::__construct($aProperties);
+
         $this->setValidatorFunction(
-            function () {
+            function ($oElement) {
+                /** @var $oElement ElementAbstract */
+
                 $aValues = array();
 
-                if (!is_array($this->oElement->getValue())) {
+                if (!is_array($oElement->getValue())) {
                     return true;
                 }
-                foreach ($this->oElement->getValue() as $sValue) {
+                foreach ($oElement->getValue() as $sValue) {
                     if (!empty($aValues) && !in_array($sValue, $aValues)) {
                         return false;
                     }

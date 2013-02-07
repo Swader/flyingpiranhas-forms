@@ -3,6 +3,7 @@
 namespace flyingpiranhas\forms\validators;
 
 use flyingpiranhas\common\traits\ProtectedPropertySetter;
+use Exception;
 use Closure;
 use BadFunctionCallException;
 use flyingpiranhas\forms\elements\abstracts\ElementAbstract;
@@ -70,7 +71,7 @@ class Validator
         }
 
         $oValFun = $this->oValidatorFunction;
-        return $oValFun();
+        return $oValFun($this->oElement);
     }
 
     /**
@@ -130,7 +131,11 @@ class Validator
      */
     public function __toString()
     {
-        return ($this->isValid()) ? $this->sHint : $this->sErrorMessage;
+        try {
+            return ($this->isValid()) ? $this->sHint : $this->sErrorMessage;
+        } catch (Exception $oException) {
+            return $oException->getMessage();
+        }
     }
 
 }

@@ -3,6 +3,7 @@
 namespace flyingpiranhas\forms\validators;
 
 use flyingpiranhas\forms\exceptions\FormException;
+use flyingpiranhas\forms\elements\abstracts\ElementAbstract;
 
 /**
  * The Format validator should be used with Text elements, or derivations,
@@ -43,8 +44,10 @@ class Format extends Validator
 
         $sFormat = $this->sFormat;
         $this->setValidatorFunction(
-            function () use ($sFormat) {
-                $mValue = $this->oElement->getValue();
+            function ($oElement) use ($sFormat) {
+                /** @var $oElement ElementAbstract */
+
+                $mValue = $oElement->getValue();
 
                 if (!is_scalar($mValue) && $mValue !== null) {
                     throw new FormException('Cannot validate format of a non scalar value');

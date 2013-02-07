@@ -4,6 +4,7 @@ namespace flyingpiranhas\forms\validators;
 
 use flyingpiranhas\forms\elements;
 use flyingpiranhas\forms\elements\Checkbox;
+use flyingpiranhas\forms\elements\abstracts\ElementAbstract;
 
 /**
  * The Required validator can be used with a number of elements
@@ -39,8 +40,8 @@ class Required extends Validator
     {
         parent::__construct($aProperties);
         $this->setValidatorFunction(
-            function () {
-                $oElement = $this->oElement;
+            function ($oElement) {
+                /** @var $oElement ElementAbstract */
 
                 if ($oElement instanceof Checkbox) {
                     /** @var $oElement Checkbox */
