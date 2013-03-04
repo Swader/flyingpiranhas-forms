@@ -130,8 +130,8 @@ class Form
     }
 
     /**
-     * @param string                                                         $sKey
-     * @param ElementAbstract|array                                          $oElement
+     * @param string                $sKey
+     * @param ElementAbstract|array $oElement
      *
      * @return Form
      * @throws FormException
@@ -205,12 +205,13 @@ class Form
     {
         $this->bPostback = true;
 
-        $aValues = $oRequest->getParams($oRequest->getServer()->REQUEST_METHOD);
+        $sRequestMethod = $oRequest->getServer()['REQUEST_METHOD'];
+        $aValues = $oRequest->getParams($sRequestMethod);
         foreach ($oRequest->getParams(Request::PARAM_TYPES_FILES) as $sKey => $aFile) {
             $aValues[$sKey] = $aFile;
         }
 
-        $this->setValue($aValues->toArray());
+        $this->setValue($aValues);
         return $this->processPost();
     }
 

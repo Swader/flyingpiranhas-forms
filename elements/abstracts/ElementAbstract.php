@@ -27,7 +27,7 @@ abstract class ElementAbstract
     use PropertySetter;
 
     /** @var string */
-    protected $sName = '';
+    protected $sName = null;
 
     /** @var string */
     protected $sLabel = '';
@@ -332,6 +332,7 @@ abstract class ElementAbstract
         if ($this->oGroup instanceof Group) {
             return $this->oGroup->getDisplayName() . '[' . $this->sName . ']';
         }
+
         return $this->sName;
     }
 
